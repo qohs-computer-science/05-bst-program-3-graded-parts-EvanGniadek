@@ -9,6 +9,20 @@
 
  public class BSTTester {
    public static void main(String[] args) {
-   
-	
+    BST test = new BST();
+
+    String alpha = "qwertyuiopasdfghjklzxcvbnm";
+    for(int j = 0; j < 26; j++)
+    {
+      test.add(alpha.charAt(0));
+      alpha = alpha.substring(1);
+    }//end of for loop
+    System.out.println("now in order");
+    test.printInOrder();
+    System.out.println("now pre order");
+    test.printPreOrder();
+    System.out.println("now post order");
+    test.printPostOrder();
+
  }
+}
