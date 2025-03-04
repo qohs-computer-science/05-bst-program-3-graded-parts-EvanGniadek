@@ -23,6 +23,12 @@
     test.printPreOrder();
     System.out.println("now post order");
     test.printPostOrder();
-
+    test.replace('d', 't');
+    System.out.println("peep");
+    test.printInOrder();
+    if(test.find('u')) System.out.println("works");
+    test.delete('s');
+    System.out.println("s has been deleted ");
+    test.printInOrder();
  }
 }
