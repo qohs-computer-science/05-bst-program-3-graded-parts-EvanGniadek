@@ -43,6 +43,7 @@ public class BST implements BSTInterface
                 else
                             addHelper(newVal, root.getRight());
             }
+            size++;
     }//end of add 
     
     public boolean find(Comparable toFind)
@@ -94,20 +95,26 @@ public class BST implements BSTInterface
                 else
                      deleteHelper(toDelete, root.getRight());
         }
+        if(isDelete)
+            size--;
         return isDelete;
     } //end of delete 
 
     public boolean replace(Comparable old, Comparable toAdd)
     {
         isReplace = false;
-        replaceHelper(old, toAdd, root); 
+        isReplace = find(old);
+        if(isReplace) size--;
+        size++;
+        delete(old);
+        addHelper(toAdd, root);
         return isReplace;
     }//end of replace
 
     public void printPostOrder()
     {
         if(root!=null)postOrderHelper(root);
-    }//ebd of post order
+    }//end of post order
     
     public void printInOrder()
     {
@@ -144,18 +151,6 @@ public class BST implements BSTInterface
             findHelper(toFind, parent.getRight());
     } //end of findHelper;
 
-    private void replaceHelper(Comparable old, Comparable newVal,  TreeNode parent)
-    {
-        if(parent.getValue().compareTo(old) == 0){
-            parent.setValue(newVal);
-            isReplace = true;
-        }else if(parent.getValue().compareTo(old) >= 0 && parent.getLeft() == null);
-        else if(parent.getValue().compareTo(old) >= 0)
-            replaceHelper(old, newVal, parent.getLeft());
-        else if(parent.getValue().compareTo(old) < 0 && parent.getRight() == null);
-        else if(parent.getValue().compareTo(old) < 0 )
-            replaceHelper(old, newVal, parent.getRight());  
-    }
 
     private void inOrderHelper(TreeNode node)
     {
@@ -201,6 +196,7 @@ public class BST implements BSTInterface
        }
        else
        {
+            isDelete = true;
             if(parent.getLeft() == null)
                 return parent.getRight();
             if(parent.getRight() == null)
@@ -211,7 +207,7 @@ public class BST implements BSTInterface
             parent.setRight(deleteHelper(temp.getValue(), parent.getRight()));
        }
        return parent;
-    }
+    }//end of delete helper 
 
     private TreeNode getThat(TreeNode curr)
     {
@@ -219,6 +215,6 @@ public class BST implements BSTInterface
             while(curr != null && curr != null)
                 curr = curr.getLeft();
         return curr;
-    }
+    }//end of get that 
 
 }
